@@ -1,0 +1,74 @@
+# %%
+
+import pandas as pd
+import glob
+
+filestoread = glob.glob('Users/d3ops/Downloads/Purchase_OrderR?????????_*.csv')
+print(filestoread)
+
+# dfs = []
+
+# for file in filestoread:
+#     df = pd.read_csv(file, encoding='utf-8')
+#     dfs.append(df)
+
+# combined_df = pd.concat(dfs, ignore_index=True)
+
+# print(combined_df.shape)
+
+# %%
+acct_code_dict = {
+    9421903673244: 227010725,
+    9421903673220: 225110726,
+    9421905741828: 225510725,
+    9421903673206: 223010725,
+    9421034850477: 224110725,
+    9421905131841: 221010725,
+    9421034854208: 284110725
+    }
+
+po_number = combined_df.iloc[1, 0]
+po_date = combined_df.iloc[1, 2]
+deldate = combined_df.iloc[1, 5]
+shipdc = combined_df.iloc[1, 10]
+netprice = combined_df.iloc[1, 92]
+
+item_list = []
+total_rows = len(combined_df)
+for row in range(0, (total_rows)):
+    contactname = 'Coles - Grocery Holdings Pty Limited'
+    ponumber = po_number
+    inv_number = f"INV-{po_number}"
+    podate = po_date
+    duedate = deldate
+    unitqty = combined_df.iloc[row, 12]
+    unitprice = combined_df.iloc[row, 14]
+    productid = combined_df.iloc[row, 86]
+    acct_code = acct_code_dict.get(productid), ""
+    tax_type = "GST on Income"
+
+    itemtuple = (contactname, '', '', '', '', '', '', '', '', '', inv_number, ponumber, podate, duedate, productid,
+     '', unitqty, unitprice, '', acct_code, tax_type, '', '', '', '', '', '')    
+
+    item_list.append(itemtuple)
+
+    print(itemtuple)
+
+column_names = [
+"*ContactName", "EmailAddress", "POAddressLine1", "POAddressLine2", "POAddressLine3",
+"POAddressLine4", "POCity", "PORegion", "POPostalCode", "POCountry", "*InvoiceNumber", "Reference", "*InvoiceDate",
+"*DueDate", "InventoryItemCode", "*Description", "*Quantity", "*UnitAmount", "Discount", "*AccountCode",
+"*TaxType", "TrackingName1", "TrackingOption1", "TrackingName2", "TrackingOption2", "Currency", "BrandingTheme"
+]
+
+
+# %%
+# import csv
+# from tkinter.filedialog import askopenfilename
+
+# with open(askopenfilename(), newline='', encoding='utf-8') as csvfile:
+#     reader = csv.reader(csvfile)
+#     column_names = next(reader)
+#     column_names = [name.strip() for name in column_names]
+#     for row in reader:
+#         print(row)
