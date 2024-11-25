@@ -30,8 +30,7 @@ def main():
             for line in line_deets:
                 store_number = int(line[1])
                 store_name = twl_store_names.get(store_number, "")['name']
-                # store_group = twl_store_names.get(store_number, "")['group']
-                store_group = twl_store_names.get(store_number, {}).get('group', '')
+                store_group = twl_store_names.get(store_number, "")['group']
                 gtin = int(line[3])
                 units = int(line[9])
                 qty = units/twl_ctn_qtys.get(gtin, 9999)
@@ -52,7 +51,7 @@ def main():
             for line in line_deets:
                 store_number = int(line[1])
                 store_name = twl_store_names.get(store_number, "")['name']
-                store_group = twl_store_names.get(store_number, "")['group']#why the fuck does this syntax owrk here but nt in the packlist function?
+                store_group = twl_store_names.get(store_number, "")['group']
                 gtin = int(line[2])
                 units = int(line[8])
                 qty = units/twl_ctn_qtys.get(gtin, 9999)

@@ -111,7 +111,7 @@ twl_store_names = {
     211: {'name': 'Richmond', 'group': 'Priority'},
     212: {'name': 'Wanaka (SWAS)', 'group': 'Priority'},
     220: {'name': 'Riccarton', 'group': 'Priority'},
-    222: {'name': 'Turanga Crossing'},
+    222: {'name': 'Turanga Crossing', 'group': 'Priority'},
     262: {'name': 'NIDC Central Fulfilment Centre', 'group': 'Priority'},
     405: {'name': 'Manukau', 'group': 'Priority'},
         }
