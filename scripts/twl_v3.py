@@ -34,10 +34,10 @@ def main():
                 gtin = int(line[3])
                 units = int(line[9])
                 qty = units/twl_ctn_qtys.get(gtin, 9999)
-                packlist.append([f'{store_number} - {store_name}', qty]) #GTIN removed to preserve functionality
+                packlist.append([store_group, f'{store_number} - {store_name}', qty]) #GTIN removed to preserve functionality
 
-            packtable = pd.DataFrame(packlist, columns=['Store Number', 'Qty']).groupby(['Store Number']).sum()
-            # packtable = pd.DataFrame(packlist, columns=['Store Number', 'Qty']).groupby(['Store Number'], sort = False).sum()
+            packtable = pd.DataFrame(packlist, columns=['Group', 'Store Number', 'Qty']).groupby(['Group', 'Store Number']).sum()
+            packtable.index = [f"{g} {s}" for g, s in packtable.index]
             packtable.loc['Total Inners:'] = packtable.sum()
 
             print('\n')
@@ -55,10 +55,10 @@ def main():
                 gtin = int(line[2])
                 units = int(line[8])
                 qty = units/twl_ctn_qtys.get(gtin, 9999)
-                polist.append([f'{store_number} - {store_name}', qty]) #GTIN removed to preserve functionality
+                polist.append([store_group, f'{store_number} - {store_name}', qty])
 
-            packtable = pd.DataFrame(polist, columns=['Store Number', 'Qty']).groupby(['Store Number']).sum()
-            # packtable = pd.DataFrame(polist, columns=['Store Number', 'Qty']).groupby(['Store Number'], sort = False).sum()
+            packtable = pd.DataFrame(polist, columns=['Group', 'Store Number', 'Qty']).groupby(['Group','Store Number']).sum()
+            packtable.index = [f"{g} {s}" for g, s in packtable.index]
             packtable.loc['Total Inners:'] = packtable.sum()
 
             print('\n')
