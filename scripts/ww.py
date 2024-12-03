@@ -4,7 +4,7 @@ import xml.etree.ElementTree as ET
 import tkinter as tk
 from tkinter.filedialog import askopenfilename
 from datetime import datetime, timedelta
-from dictionaries import ww_acct_code_dict
+from dictionaries import ww_acct_code_dict, column_names
 
 xml_file = askopenfilename()
 
@@ -50,12 +50,6 @@ adjustment_line = [contactname, emailaddress, '', '', '', '', '', '', '', pocoun
          inv_number.replace("INV","CN"), f'PO {ponumber}', duedate, dueonterms.strftime('%d/%m/%Y'), '', 'Adjustment to Total', 1, 0.00, '', 41100, 'BAS Excluded', '',
           '', '', '', currency, '']
     
-column_names = [
-    "*ContactName", "EmailAddress", "POAddressLine1", "POAddressLine2", "POAddressLine3",
-    "POAddressLine4", "POCity", "PORegion", "POPostalCode", "POCountry", "*InvoiceNumber", "Reference", "*InvoiceDate",
-    "*DueDate", "InventoryItemCode", "*Description", "*Quantity", "*UnitAmount", "Discount", "*AccountCode",
-    "*TaxType", "TrackingName1", "TrackingOption1", "TrackingName2", "TrackingOption2", "Currency", "BrandingTheme"
-]
 
 def main():
     csv_lines = []

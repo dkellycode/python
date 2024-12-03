@@ -3,7 +3,7 @@ import csv
 import re
 from datetime import datetime, timedelta
 from container_tools import msgbox
-from dictionaries import coles_acct_code_dict
+from dictionaries import coles_acct_code_dict, column_names
 
 csv_orders = glob.glob('/Users/d3ops/Downloads/Purchase_OrderR*.csv')
 if len(csv_orders) == 0:
@@ -12,14 +12,6 @@ if len(csv_orders) == 0:
 
 for order in csv_orders:
     print("order processed: " + order)
-
-
-column_names = [
-"*ContactName", "EmailAddress", "POAddressLine1", "POAddressLine2", "POAddressLine3",
-"POAddressLine4", "POCity", "PORegion", "POPostalCode", "POCountry", "*InvoiceNumber", "Reference", "*InvoiceDate",
-"*DueDate", "InventoryItemCode", "*Description", "*Quantity", "*UnitAmount", "Discount", "*AccountCode",
-"*TaxType", "TrackingName1", "TrackingOption1", "TrackingName2", "TrackingOption2", "Currency", "BrandingTheme"
-]
 
 def main():
     """

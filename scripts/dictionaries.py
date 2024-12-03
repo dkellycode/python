@@ -143,3 +143,13 @@ coles_acct_code_dict = {
     9421905131841: {'acct': 221010725, 'desc': 'd3 Athletic Tape'},
     9421034854208: {'acct': 284110725, 'desc': 'd3 Instant ice Pack x4'}
     }
+
+#XERO
+
+#Generic column names list for building Xero import files
+column_names = [
+    "*ContactName", "EmailAddress", "POAddressLine1", "POAddressLine2", "POAddressLine3",
+    "POAddressLine4", "POCity", "PORegion", "POPostalCode", "POCountry", "*InvoiceNumber", "Reference", "*InvoiceDate",
+    "*DueDate", "InventoryItemCode", "*Description", "*Quantity", "*UnitAmount", "Discount", "*AccountCode",
+    "*TaxType", "TrackingName1", "TrackingOption1", "TrackingName2", "TrackingOption2", "Currency", "BrandingTheme"
+]

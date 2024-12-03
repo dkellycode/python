@@ -2,6 +2,7 @@ import glob
 import csv
 from datetime import datetime, timedelta
 from container_tools import msgbox
+from dictionaries import column_names
 
 raw_csv = glob.glob('/Users/d3ops/Downloads/AirPointsStore_APSN_D3NZ*.csv')
 if len(raw_csv) == 0:
@@ -17,12 +18,6 @@ acct_code_dict = {
     'D3PTMDSV': 24570
     }
 
-column_names = [
-    "*ContactName", "EmailAddress", "POAddressLine1", "POAddressLine2", "POAddressLine3",
-    "POAddressLine4", "POCity", "PORegion", "POPostalCode", "POCountry", "*InvoiceNumber", "Reference", "*InvoiceDate",
-    "*DueDate", "InventoryItemCode", "*Description", "*Quantity", "*UnitAmount", "Discount", "*AccountCode",
-    "*TaxType", "TrackingName1", "TrackingOption1", "TrackingName2", "TrackingOption2", "Currency", "BrandingTheme"
-]
 
 def main():
     """

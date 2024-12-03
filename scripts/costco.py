@@ -1,9 +1,9 @@
-# %%
 
 import xml.etree.ElementTree as ET
 import tkinter as tk
 from datetime import datetime
 from tkinter.filedialog import askopenfilename
+from dictionaires import column_names
 
 xml_file = askopenfilename()
 
@@ -48,15 +48,6 @@ for i, elem in enumerate(shipaddress.iter()):
         break
 
 full_address = ' '.join(addresselements).lstrip()
-
-column_names = [
-    "*ContactName", "EmailAddress", "POAddressLine1", "POAddressLine2", "POAddressLine3",
-    "POAddressLine4", "POCity", "PORegion", "POPostalCode", "POCountry", "*InvoiceNumber", "Reference", "*InvoiceDate",
-    "*DueDate", "InventoryItemCode", "*Description", "*Quantity", "*UnitAmount", "Discount", "*AccountCode",
-    "*TaxType", "TrackingName1", "TrackingOption1", "TrackingName2", "TrackingOption2", "Currency", "BrandingTheme"
-]
-
-# %%
 
 #create dictionary of key columns
 def main():
