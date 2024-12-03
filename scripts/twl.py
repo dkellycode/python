@@ -1,58 +1,58 @@
-"""Tool for parsing TWL order CSV and creating packing summary for distribution"""
+"""Tool for parsing mutlipe TWL order CSVs and creating packing summary for distribution"""
 import csv
+import glob
 import pandas as pd
-import tkinter as tk
-from tkinter.filedialog import askopenfilename
 from dictionaries import twl_ctn_qtys, twl_store_names
 
-root = tk.Tk()
-# root.attributes('-topmost', True)
-# root.lift()
-# root.focus_force()
-root.withdraw()
-
-
-raw_csv = askopenfilename()
-with open(raw_csv, 'r', encoding= 'UTF-8') as file:
-    reader = csv.reader(file)
-    header_values = next(reader)
-    line_deets = []
-    for line in reader:
-        line_deets.append(line)
-
-def packlist():
-    packlist = []
-    for line in line_deets:
-        store_number = int(line[1])
-        store_name = twl_store_names.get(store_number, 'Unknown')
-        gtin = int(line[3])
-        units = int(line[9])
-        qty = units/twl_ctn_qtys.get(gtin, 9999)
-        packlist.append([f'{store_number} - {store_name}', qty]) #GTIN removed to preserve functionality
-
-    packtable = pd.DataFrame(packlist, columns=['Store Number', 'Qty']).groupby(['Store Number']).sum()
-
-    print(packtable)
-
-def asn():
-    packlist = []
-    for line in line_deets:
-        store_number = int(line[1])
-        store_name = twl_store_names.get(store_number, 'Unknown')
-        gtin = int(line[2])
-        units = int(line[8])
-        qty = units/twl_ctn_qtys.get(gtin, 9999)
-        packlist.append([f'{store_number} - {store_name}', qty]) #GTIN removed to preserve functionality
-
-    packtable = pd.DataFrame(packlist, columns=['Store Number', 'Qty']).groupby(['Store Number']).sum()
-
-    print(packtable)
+asns = glob.glob('/Users/d3ops/Downloads/asntocsv*.csv')
+pos = glob.glob('/Users/d3ops/Downloads/potocsv*.csv')
+raw_csv = asns + pos
+import_count = 1
+for each in raw_csv:
+    print()
+    print(f'Order ({import_count}) imported: {each}')
+    import_count += 1
 
 def main():
-    if "asn" in raw_csv.lower():
-        asn()
-    else:
-        packlist()
+
+    def packlist_build():
+        polist = []
+        for line in line_deets:
+            store_number = int(line[1])
+            store_name = twl_store_names.get(store_number, "")['name']
+            store_group = twl_store_names.get(store_number, "")['group']
+            gtin = int(line[2]) if "asn" in each.lower() else int(line[3])
+            units = int(line[8]) if "asn" in each.lower() else int(line[9])
+            qty = units/twl_ctn_qtys.get(gtin, 9999)
+            polist.append([store_group, f'{store_number} - {store_name}', qty])
+
+        packtable = pd.DataFrame(polist, columns=['Group', 'Store Number', 'Qty']).groupby(['Group','Store Number']).sum()
+        packtable.index = [f"{g} {s}".strip('()') for g, s in packtable.index]
+        packtable.loc['Total Inners:'] = packtable.sum()
+
+        # return packtable
+        # packtable.to_excel(f'{po_number} Label List.xlsx', sheet_name='Label List')
+
+        print('\n')
+        print(f'PO Number: {po_number}')
+        print(packtable)
+        print()
+
+
+    for each in raw_csv:
+        # global po_number, line_deets
+        line_deets = []
+        with open(each, 'r', encoding='UTF-8') as file:
+            reader = csv.reader(file)
+            header_values = next(reader)
+            po_number = header_values[0]
+            for line in reader:
+                line_deets.append(line)
+                
+        packlist_build()
 
 if __name__ == "__main__":
     main()
+
+
+    # packtable.index = [f"{g} {s}" for g, s in packtable.index]
