@@ -4,21 +4,13 @@ import xml.etree.ElementTree as ET
 import tkinter as tk
 from tkinter.filedialog import askopenfilename
 from datetime import datetime, timedelta
+from dictionaries import ww_acct_code_dict
 
 xml_file = askopenfilename()
 
 tree = ET.parse(xml_file)
 root = tree.getroot()
 
-acct_code_dict = {
-    9421903673244: {'acct': 227010725, 'desc': 'd3 RST - Rigid Strapping Tape'},
-    9421903673220: {'acct': 225110726, 'desc': 'd3 K6.0 Kinesiology Tape'},
-    9421905741828: {'acct': 225510725, 'desc': 'd3 X6.0 Waterproof Kinesiology Tape'},
-    9421903673206: {'acct': 223010725, 'desc': 'd3 Cohesive Bandage'},
-    9421034850477: {'acct': 224110725, 'desc': 'd3 Light EAB Spandex Bandage'},
-    9421905131841: {'acct': 221010725, 'desc': 'd3 Athletic Tape'},
-    9421034854208: {'acct': 284110725, 'desc': 'd3 Instant Ice Pack 4pk'}
-    }
 #build the line detail structure
 po_number = root.find('.//BuyerPONumber').text
 orderitems = root.findall('.//POItem')
@@ -34,10 +26,10 @@ for orderitem in orderitems:
     #podate = root.find('.//CreationDate/DateTime/Day').text + "/" + root.find('.//CreationDate/DateTime/Month').text + "/" + root.find('.//CreationDate/DateTime/Year').text
     duedate = root.find('.//DueDate/DateTime/Day').text + "/" + root.find('.//DueDate/DateTime/Month').text + "/" + root.find('.//DueDate/DateTime/Year').text
     productid = orderitem.find('ProductIdentifierList').find('ProductID').find('PartNumber').text
-    productdesc = acct_code_dict.get(int(productid), "")["desc"]
+    productdesc = ww_acct_code_dict.get(int(productid), "")["desc"]
     orderqty = orderitem.find('OrderQuantity').find('Quantity').find('Number').find('Value').text[:-4] #if they ever order >99 this will fuck out
     netprice = (float(orderitem.find('NetPriceIncludingTax').find('MonetaryValue').find('Number').find('Value').text[:-2])/100)/1.1
-    acct_code = acct_code_dict.get(int(productid), "")['acct']
+    acct_code = ww_acct_code_dict.get(int(productid), "")['acct']
     tax_type = "GST on Income"
     currency = root.find('.//CurrencyISO').text
     dueonterms = datetime.strptime(duedate, '%d/%m/%Y') + timedelta(days=14)

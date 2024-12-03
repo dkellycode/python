@@ -3,6 +3,7 @@ import csv
 import re
 from datetime import datetime, timedelta
 from container_tools import msgbox
+from dictionaries import coles_acct_code_dict
 
 csv_orders = glob.glob('/Users/d3ops/Downloads/Purchase_OrderR*.csv')
 if len(csv_orders) == 0:
@@ -12,15 +13,6 @@ if len(csv_orders) == 0:
 for order in csv_orders:
     print("order processed: " + order)
 
-acct_code_dict = {
-    9421903673244: {'acct': 227010726, 'desc': 'd3 RST - Rigid Strapping Tape'},
-    9421903673220: {'acct': 225110725, 'desc': 'd3 K6.0 Kinesiology Tape'},
-    9421905741828: {'acct': 225510726, 'desc': 'd3 X6.0 Waterproof Kinesiology Tape'},
-    9421903673206: {'acct': 223010726, 'desc': 'd3 Cohesive Bandage'},
-    9421034850477: {'acct': 224110725, 'desc': 'd3 Light EAB Spandex Bandage'},
-    9421905131841: {'acct': 221010725, 'desc': 'd3 Athletic Tape'},
-    9421034854208: {'acct': 284110725, 'desc': 'd3 Instant ice Pack x4'}
-    }
 
 column_names = [
 "*ContactName", "EmailAddress", "POAddressLine1", "POAddressLine2", "POAddressLine3",
@@ -56,10 +48,10 @@ def main():
             inv_number = re.sub('R-', '', f'INV-{headers[0]}')[:-1]
             duedate = headers[5]
             productid = int(line[85])
-            productdesc = acct_code_dict.get(productid, "")["desc"]
+            productdesc = coles_acct_code_dict.get(productid, "")["desc"]
             orderqty = line[12]
             netprice = round((float(line[14])/1.1),2)
-            acct_code = acct_code_dict.get(productid, "")["acct"]
+            acct_code = coles_acct_code_dict.get(productid, "")["acct"]
             tax_type = "GST on Income"
             currency = 'AUD'
 

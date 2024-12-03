@@ -1,6 +1,8 @@
 """FMCG dictionaries to be called as required"""
+
 #TWL
-#  Dictionary of carton quantities per product GTIN
+
+#  TWLcarton quantities per product GTIN
 twl_ctn_qtys = {
         9421903673008:8,
         9421903673022:6,
@@ -12,6 +14,7 @@ twl_ctn_qtys = {
         9421903673091:10
         }
 
+#TWL store data for matching PO data and sorting pack lists
 twl_store_names = {
     103: {'name': 'Westcity', 'group': 'B'},
     107: {'name': 'New Lynn', 'group': 'B'},
@@ -115,3 +118,28 @@ twl_store_names = {
     405: {'name': 'Manukau', 'group': 'A'},
         }
 
+#WOOLWORTHS
+
+#Xero account codes for Woolworths products
+ww_acct_code_dict = {
+    9421903673244: {'acct': 227010725, 'desc': 'd3 RST - Rigid Strapping Tape'},
+    9421903673220: {'acct': 225110726, 'desc': 'd3 K6.0 Kinesiology Tape'},
+    9421905741828: {'acct': 225510725, 'desc': 'd3 X6.0 Waterproof Kinesiology Tape'},
+    9421903673206: {'acct': 223010725, 'desc': 'd3 Cohesive Bandage'},
+    9421034850477: {'acct': 224110725, 'desc': 'd3 Light EAB Spandex Bandage'},
+    9421905131841: {'acct': 221010725, 'desc': 'd3 Athletic Tape'},
+    9421034854208: {'acct': 284110725, 'desc': 'd3 Instant Ice Pack 4pk'}
+    }
+
+#COLES
+
+#Xero account codes for Coles products
+coles_acct_code_dict = {
+    9421903673244: {'acct': 227010726, 'desc': 'd3 RST - Rigid Strapping Tape'},
+    9421903673220: {'acct': 225110725, 'desc': 'd3 K6.0 Kinesiology Tape'},
+    9421905741828: {'acct': 225510726, 'desc': 'd3 X6.0 Waterproof Kinesiology Tape'},
+    9421903673206: {'acct': 223010726, 'desc': 'd3 Cohesive Bandage'},
+    9421034850477: {'acct': 224110725, 'desc': 'd3 Light EAB Spandex Bandage'},
+    9421905131841: {'acct': 221010725, 'desc': 'd3 Athletic Tape'},
+    9421034854208: {'acct': 284110725, 'desc': 'd3 Instant ice Pack x4'}
+    }
