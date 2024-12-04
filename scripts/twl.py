@@ -29,6 +29,7 @@ def main():
         packtable = pd.DataFrame(polist, columns=['Group', 'Store Number', 'Qty']).groupby(['Group','Store Number']).sum()
         packtable.index = [f"{g} {s}".strip('()') for g, s in packtable.index]
         packtable.loc['Total Inners:'] = packtable.sum()
+        packtable.loc['Total Stores:'] = packtable.iloc[:-1].count()
 
         # return packtable
         # packtable.to_excel(f'{po_number} Label List.xlsx', sheet_name='Label List')
