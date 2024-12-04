@@ -26,19 +26,25 @@ def main():
             qty = units/twl_ctn_qtys.get(gtin, 9999)
             polist.append([store_group, f'{store_number} - {store_name}', qty])
 
-        packtable = pd.DataFrame(polist, columns=['Group', 'Store Number', 'Qty']).groupby(['Group','Store Number']).sum()
-        packtable.index = [f"{g} {s}".strip('()') for g, s in packtable.index]
+        
+        packtable = pd.DataFrame(polist, columns=['Group', 'Store Number','Qty']).groupby(['Store Number']).sum()
         packtable.loc['Total Inners:'] = packtable.sum()
         packtable.loc['Total Stores:'] = packtable.iloc[:-1].count()
+        printlabels = pd.DataFrame(polist, columns=['Group', 'Store Number','Qty']).groupby(['Group','Store Number']).sum()
+        printlabels.index = [f"{g} {s}".strip('()') for g, s in printlabels.index]
+        printlabels.loc['Total Inners:'] = printlabels.sum()
+        printlabels.loc['Total Stores:'] = printlabels.iloc[:-1].count()
 
-        # return packtable
-        # packtable.to_excel(f'{po_number} Label List.xlsx', sheet_name='Label List')
+        # print('\n'*2,f'PO Number: {po_number} >> Packlist','\n',packtable.drop('Group', axis=1),'\n' *2,f'PO Number: {po_number} >> Labels List','\n',printlabels)
 
         print('\n')
-        print(f'PO Number: {po_number}')
-        print(packtable)
-        print()
-
+        print(f'PO Number: {po_number} >>> Packlist')
+        print('\n')
+        print(packtable.drop('Group', axis=1))
+        print('\n')
+        print(f'PO Number: {po_number} >>> Labels List')
+        print('\n')
+        print(printlabels)
 
     for each in raw_csv:
         # global po_number, line_deets
@@ -56,4 +62,4 @@ if __name__ == "__main__":
     main()
 
 
-    # packtable.index = [f"{g} {s}" for g, s in packtable.index]
+    # printlabels.index = [f"{g} {s}" for g, s in printlabels.index]
