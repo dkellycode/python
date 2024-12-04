@@ -35,16 +35,8 @@ def main():
         printlabels.loc['Total Inners:'] = printlabels.sum()
         printlabels.loc['Total Stores:'] = printlabels.iloc[:-1].count()
 
-        # print('\n'*2,f'PO Number: {po_number} >> Packlist','\n',packtable.drop('Group', axis=1),'\n' *2,f'PO Number: {po_number} >> Labels List','\n',printlabels)
+        print('\n'*2,f'PO Number: {po_number} >> Packlist','\n',packtable.drop('Group', axis=1),'\n' *2,f'PO Number: {po_number} >> Labels List','\n',printlabels)
 
-        print('\n')
-        print(f'PO Number: {po_number} >>> Packlist')
-        print('\n')
-        print(packtable.drop('Group', axis=1))
-        print('\n')
-        print(f'PO Number: {po_number} >>> Labels List')
-        print('\n')
-        print(printlabels)
 
     for each in raw_csv:
         # global po_number, line_deets
