@@ -9,13 +9,12 @@ pos = glob.glob('/Users/d3ops/Downloads/potocsv*.csv')
 raw_csv = asns + pos
 import_count = 1
 for each in raw_csv:
-    print()
-    print(f'Order ({import_count}) imported: {each}')
+    print('\n',f'Order ({import_count}) imported: {each}')
     import_count += 1
 
 def main():
 
-    def packlist_build():
+    def packlist_build() -> list:
         polist = []
         for line in line_deets:
             store_number = int(line[1])
@@ -25,7 +24,7 @@ def main():
             units = int(line[8]) if "asn" in each.lower() else int(line[9])
             qty = units/twl_ctn_qtys.get(gtin, 9999)
             polist.append([store_group, f'{store_number} - {store_name}', qty])
-
+        pass
         
         packtable = pd.DataFrame(polist, columns=['Group', 'Store Number','Qty']).groupby(['Store Number']).sum()
         packtable.loc['Total Inners:'] = packtable.sum()
