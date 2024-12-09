@@ -18,8 +18,8 @@ def main():
         polist = []
         for line in line_deets:
             store_number = int(line[1])
-            store_name = twl_store_names.get(store_number, "")['name']
-            store_group = twl_store_names.get(store_number, "")['group']
+            store_name = twl_store_names.get(store_number, "NOT FOUND")['name']
+            store_group = twl_store_names.get(store_number, "NOT FOUND")['group']
             gtin = int(line[2]) if "asn" in each.lower() else int(line[3])
             units = int(line[8]) if "asn" in each.lower() else int(line[9])
             qty = units/twl_ctn_qtys.get(gtin, 9999)

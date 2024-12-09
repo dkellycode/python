@@ -3,7 +3,8 @@ import xml.etree.ElementTree as ET
 import tkinter as tk
 from datetime import datetime
 from tkinter.filedialog import askopenfilename
-from dictionaires import column_names
+from dictionaries import column_names
+from container_tools import msgbox
 
 xml_file = askopenfilename()
 
@@ -86,10 +87,7 @@ def main():
         for line in csv_lines:
             f.write(line + "\n")
 
-    viewroot = tk.Tk()
-    viewroot.withdraw()  # Hide the main window
-    tk.messagebox.showinfo("Success", f"CSV file has been successfully created: {output_file}")
-    viewroot.destroy()
+    msgbox("Success", f"CSV file has been successfully created: {output_file}")
 
     return 0
 
