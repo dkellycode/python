@@ -8,6 +8,15 @@ asns = glob.glob('/Users/d3ops/Downloads/asntocsv*.csv')
 pos = glob.glob('/Users/d3ops/Downloads/potocsv*.csv')
 raw_csv = asns + pos
 import_count = 1
+
+if len(raw_csv) == 0:
+    print('No files found, please ensure files are in the downloads folder')
+    exit()
+elif len(raw_csv) > 2:
+    print('Too many TWL files in folder, please select only two from this period to import')
+    exit()
+else:
+    each = raw_csv[0]
 for each in raw_csv:
     print('\n',f'Order ({import_count}) imported: {each}')
     import_count += 1
