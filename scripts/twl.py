@@ -10,10 +10,10 @@ raw_csv = asns + pos
 import_count = 1
 
 if len(raw_csv) == 0:
-    print('No files found, please ensure files are in the downloads folder')
+    print('No files found, please ensure files are in the downloads folder.')
     exit()
 elif len(raw_csv) > 2:
-    print('Too many TWL files in folder, please select only two from this period to import')
+    print('Too many TWL files in folder, please select only two from this period to import.')
     exit()
 else:
     each = raw_csv[0]
