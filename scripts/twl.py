@@ -1,6 +1,7 @@
 """Tool for parsing mutlipe TWL order CSVs and creating packing summary for distribution"""
 import csv
 import glob
+import os
 import pandas as pd
 from dictionaries import twl_ctn_qtys, twl_store_names
 
@@ -57,6 +58,9 @@ def main():
                 line_deets.append(line)
                 
         packlist_build()
+
+    for csvs in raw_csv:
+        os.remove(csvs)
 
 if __name__ == "__main__":
     main()

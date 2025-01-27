@@ -1,6 +1,7 @@
 import glob
 import csv
 import re
+import os
 from datetime import datetime, timedelta
 from container_tools import msgbox
 from dictionaries import coles_acct_code_dict, column_names
@@ -80,7 +81,11 @@ def main():
 
     msgbox("Success", f"CSV file has been successfully created: {output_file}")
 
+    for deltarget in csv_orders:
+        os.remove(deltarget)
+        
     return 0
+
 
 if __name__ == "__main__":
     main()

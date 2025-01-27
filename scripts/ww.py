@@ -1,5 +1,5 @@
 # %%
-
+import os
 import xml.etree.ElementTree as ET
 import tkinter as tk
 from tkinter.filedialog import askopenfilename
@@ -81,6 +81,8 @@ def main():
     viewroot.withdraw()  # Hide the main window
     tk.messagebox.showinfo("Success", f"CSV file has been successfully created: {output_file}")
     viewroot.destroy()
+
+    os.remove(xml_file)
 
     return 0
 
