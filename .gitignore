@@ -40,3 +40,6 @@ terraform.rc
 gtin13s.txt
 gtin14s.txt
 Simplified_gtin14s.txt
+
+#Ignore environment variables
+.env
